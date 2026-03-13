@@ -19,27 +19,23 @@
 // ---------------------------------------------------------------------------
 
 // Backplate
-plate_width              = 40;    // mm – plate width  (X axis)
-plate_height             = 40;    // mm – plate height (Y axis)
+plate_width              = 50;    // mm – plate width  (X axis)
+plate_height             = 55;    // mm – plate height (Y axis)
 plate_thickness          = 4;     // mm – plate thickness (Z axis)
 plate_corner_radius      = 4;     // mm – fillet radius on plate corners
 
-// Keyhole screw slot
+// Keyhole screw slot 
 keyhole_total_height     = 13;    // mm – total height of keyhole slot
 keyhole_bottom_diameter  = 8;     // mm – wide hole for screw head
 keyhole_top_width        = 5;     // mm – narrow slot for screw shaft
-keyhole_offset_y         = 0;     // mm – vertical offset from plate centre
+keyhole_offset_y         = -5;    // mm – vertical offset from plate centre
 
 // Arc channel (cap cradle) — concentric partial rings in XY, extruded in Z
 arc_radius               = 40;    // mm – outer radius of outer wall
-arc_sweep                = 60;    // deg – half-sweep from apex (total swing = 2×this)
-arc_wall_thickness       = 4;     // mm – thickness of each arc wall
-arc_channel_gap          = 8;     // mm – gap between walls (folded cap fits here)
-arc_extrusion            = 35;    // mm – how far arcs extend forward from plate face
-
-// Cap button cutout at apex
-cap_button_diameter      = 15;    // mm – diameter of cap button
-cap_button_clearance     = 4;     // mm – clearance per side of button gap
+arc_sweep                = 38;    // deg – half-sweep from apex (total swing = 2×this)
+arc_wall_thickness       = 3;     // mm – thickness of each arc wall
+arc_channel_gap          = 10;    // mm – gap between walls (folded cap fits here)
+arc_extrusion            = 25;    // mm – how far arcs extend forward from plate face
 
 // Build flags
 build_main               = true;  // Render the mount
@@ -62,9 +58,6 @@ _arc_total_z             = plate_thickness + arc_extrusion;
 // Arc centre: positioned so apex is at plate top edge (+Y)
 _arc_center_y            = plate_height / 2 - arc_radius;
 
-// Button gap
-_button_gap_width        = cap_button_diameter + 2 * cap_button_clearance;
-
 // Arc endpoint positions (where the arc ends meet the plate)
 _arc_endpoint_x          = arc_radius * sin(arc_sweep);
 
@@ -74,7 +67,6 @@ echo(str("Inner wall: R ", _inner_wall_inner_r, " to ", _inner_wall_outer_r));
 echo(str("Arc centre Y: ", _arc_center_y));
 echo(str("Arc apex Y: ", _arc_center_y + arc_radius));
 echo(str("Arc endpoint X: ±", _arc_endpoint_x, " mm"));
-echo(str("Button gap width: ", _button_gap_width, " mm"));
 
 // Keyhole geometry
 _keyhole_bottom_r        = keyhole_bottom_diameter / 2;
@@ -154,14 +146,6 @@ module arch_channel() {
                 arc_ring(_inner_wall_inner_r, arc_wall_thickness,
                          _arc_total_z, arc_sweep);
             }
-
-            // Button cutout at apex — cuts through both walls
-            translate([-_button_gap_width / 2,
-                       _inner_wall_inner_r - 0.01,
-                       -0.01])
-                cube([_button_gap_width,
-                      arc_radius - _inner_wall_inner_r + 0.02,
-                      _arc_total_z + 0.02]);
         }
 }
 
