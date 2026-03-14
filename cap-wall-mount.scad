@@ -62,7 +62,7 @@ inner_ridge_height       = 3;     // mm – how far the ridge protrudes outward 
 // Button cutout (gap at apex of outer arc for cap button)
 button_cutout_enabled    = true;  // Whether to cut a button slot in the outer arc
 button_cutout_width      = 17;    // mm – width of the cutout in X
-button_cutout_height     = 20;    // mm – height of the cutout from plate surface in Z
+button_cutout_height     = 18;    // mm – height of the cutout from plate surface in Z
 
 // Build flags
 build_main               = true;  // Render the mount
