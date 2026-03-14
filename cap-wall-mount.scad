@@ -30,7 +30,7 @@ screw_holes_enabled      = true;  // Whether to include the keyhole and screw ho
 keyhole_total_height     = 13;    // mm – total height of keyhole slot
 keyhole_bottom_diameter  = 8.5;     // mm – wide hole for screw head
 keyhole_top_width        = 4;     // mm – narrow slot for screw shaft
-keyhole_top_inset        = 22;     // mm – distance from plate top edge to keyhole top
+keyhole_top_inset        = 21;     // mm – distance from plate top edge to keyhole top
 
 // Bottom screw hole (below keyhole)
 bottom_screw_hole_enabled = true;  // Whether to include the bottom screw hole
