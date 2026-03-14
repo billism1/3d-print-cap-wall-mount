@@ -25,6 +25,7 @@ plate_thickness          = 4;     // mm – plate thickness (Z axis)
 plate_corner_radius      = 4;     // mm – fillet radius on plate corners
 
 // Keyhole screw slot 
+screw_holes_enabled      = true;  // Whether to include the keyhole and screw holes
 keyhole_total_height     = 13;    // mm – total height of keyhole slot
 keyhole_bottom_diameter  = 8;     // mm – wide hole for screw head
 keyhole_top_width        = 5;     // mm – narrow slot for screw shaft
@@ -140,7 +141,8 @@ module backplate() {
             [plate_width, plate_height, plate_thickness],
             plate_corner_radius
         );
-        keyhole();
+        if (screw_holes_enabled)
+            keyhole();
     }
 }
 
