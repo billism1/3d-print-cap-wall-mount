@@ -30,7 +30,7 @@ screw_holes_enabled      = true;  // Whether to include the keyhole and screw ho
 keyhole_total_height     = 13;    // mm – total height of keyhole slot
 keyhole_bottom_diameter  = 8.5;     // mm – wide hole for screw head
 keyhole_top_width        = 4;     // mm – narrow slot for screw shaft
-keyhole_top_inset        = 21;     // mm – distance from plate top edge to keyhole top
+keyhole_top_inset        = 20;     // mm – distance from plate top edge to keyhole top
 
 // Bottom screw hole (below keyhole)
 bottom_screw_hole_enabled = true;  // Whether to include the bottom screw hole
@@ -40,13 +40,13 @@ bottom_screw_hole_offset = 6;     // mm – gap between keyhole bottom edge and 
 // Countersink (tapered recess for drywall screw heads)
 countersink_enabled      = true;  // Whether to add tapered countersinks
 countersink_depth        = 2;     // mm – depth of the tapered countersink
-countersink_extra_dia    = 4;     // mm – how much wider the countersink is than the hole
+countersink_extra_dia    = 4.25;     // mm – how much wider the countersink is than the hole
 
 // Arc channel (cap cradle) — concentric partial rings in XY, extruded in Z
 arc_radius               = 80;    // mm – outer radius of outer wall 
 arc_sweep                = 38;    // deg – half-sweep from apex (total swing = 2×this)
 arc_wall_thickness       = 2.25;     // mm – thickness of each arc wall
-arc_channel_gap          = 9;    // mm – gap between walls (folded cap fits here)
+arc_channel_gap          = 9.5;    // mm – gap between walls (folded cap fits here)
 outer_arc_extrusion      = 25;    // mm – how far outer arc extends forward from plate face
 inner_arc_extrusion      = 20;    // mm – how far inner arc extends forward from plate face
 arc_top_inset            = 2;     // mm – distance from plate top edge to arc apex
