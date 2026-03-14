@@ -47,6 +47,7 @@ arc_sweep                = 38;    // deg – half-sweep from apex (total swing =
 arc_wall_thickness       = 3;     // mm – thickness of each arc wall
 arc_channel_gap          = 10;    // mm – gap between walls (folded cap fits here)
 arc_extrusion            = 25;    // mm – how far arcs extend forward from plate face
+arc_top_inset            = 2;     // mm – distance from plate top edge to arc apex
 
 // Build flags
 build_main               = true;  // Render the mount
@@ -66,8 +67,8 @@ _inner_wall_inner_r      = _inner_wall_outer_r - arc_wall_thickness;
 // Z extent: arcs go through plate and extend forward
 _arc_total_z             = plate_thickness + arc_extrusion;
 
-// Arc centre: positioned so apex is at plate top edge (+Y)
-_arc_center_y            = plate_height / 2 - arc_radius;
+// Arc centre: positioned so apex is at plate top edge minus inset (+Y)
+_arc_center_y            = plate_height / 2 - arc_top_inset - arc_radius;
 
 // Arc endpoint positions (where the arc ends meet the plate)
 _arc_endpoint_x          = arc_radius * sin(arc_sweep);
