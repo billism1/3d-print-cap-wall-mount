@@ -20,7 +20,7 @@
 
 // Backplate
 plate_width              = 50;    // mm – plate width  (X axis)
-plate_height             = 55;    // mm – plate height (Y axis)
+plate_height             = 50;    // mm – plate height (Y axis)
 plate_thickness          = 4;     // mm – plate thickness (Z axis)
 plate_corner_radius      = 4;     // mm – fillet radius on plate corners
 
@@ -28,7 +28,7 @@ plate_corner_radius      = 4;     // mm – fillet radius on plate corners
 keyhole_total_height     = 13;    // mm – total height of keyhole slot
 keyhole_bottom_diameter  = 8;     // mm – wide hole for screw head
 keyhole_top_width        = 5;     // mm – narrow slot for screw shaft
-keyhole_offset_y         = -5;    // mm – vertical offset from plate centre
+keyhole_top_inset        = 20;     // mm – distance from plate top edge to keyhole top
 
 // Bottom screw hole (below keyhole)
 bottom_screw_hole_enabled = true;  // Whether to include the bottom screw hole
@@ -36,7 +36,7 @@ bottom_screw_hole_diameter = 5;    // mm – diameter of bottom screw hole
 bottom_screw_hole_offset = 6;     // mm – gap between keyhole bottom edge and screw hole edge
 
 // Arc channel (cap cradle) — concentric partial rings in XY, extruded in Z
-arc_radius               = 80;    // mm – outer radius of outer wall
+arc_radius               = 80;    // mm – outer radius of outer wall 
 arc_sweep                = 38;    // deg – half-sweep from apex (total swing = 2×this)
 arc_wall_thickness       = 3;     // mm – thickness of each arc wall
 arc_channel_gap          = 10;    // mm – gap between walls (folded cap fits here)
@@ -46,7 +46,7 @@ arc_extrusion            = 25;    // mm – how far arcs extend forward from pla
 build_main               = true;  // Render the mount
 
 // Resolution
-$fn = 80;
+$fn = 180;
 
 // ---------------------------------------------------------------------------
 // 2. Derived Dimensions
@@ -76,10 +76,10 @@ echo(str("Arc endpoint X: ±", _arc_endpoint_x, " mm"));
 // Keyhole geometry
 _keyhole_bottom_r        = keyhole_bottom_diameter / 2;
 _keyhole_top_r           = keyhole_top_width / 2;
-_keyhole_bottom_cy       = keyhole_offset_y - keyhole_total_height / 2
-                           + _keyhole_bottom_r;
-_keyhole_top_cy          = _keyhole_bottom_cy + keyhole_total_height
-                           - _keyhole_top_r;
+// Top of keyhole (top of narrow slot semicircle) at plate_height/2 - inset
+_keyhole_top_cy          = plate_height / 2 - keyhole_top_inset - _keyhole_top_r;
+_keyhole_bottom_cy       = _keyhole_top_cy - keyhole_total_height
+                           + _keyhole_top_r + _keyhole_bottom_r;
 
 // ---------------------------------------------------------------------------
 // 3. Helper / Utility Modules
