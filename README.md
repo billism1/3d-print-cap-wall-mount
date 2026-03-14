@@ -10,7 +10,7 @@ The mount has four main parts:
 
 1. **Backplate** — a flat plate with rounded corners that sits flush against the wall. It includes a keyhole screw slot (and optional bottom screw hole) so you can hang it on a drywall screw.
 2. **Arc channel** — two concentric curved walls that extend forward from the backplate. They form a channel sized to hold a folded baseball cap by its brim/edge. The walls have filleted lower edges for smoother cap insertion and removal.
-3. **Strap ridge** — a small curved bump on the outer arc wall near the front edge that prevents the cap's adjustable strap from sliding forward and off the mount.
+3. **Strap ridge** — the ridge on the top arc lets you hang a cap by its back strap if you don't care about the cap facing outward. If you prefer this style, you can set `inner_arc_enabled` to `false` since the inner arc wall isn't needed. On the outer arc wall near the front edge, a small curved bump prevents the cap's adjustable strap from sliding forward and off the mount.
 4. **Button cutout** — an arched slot at the apex of the outer wall that gives the cap's top button room to sit without being compressed over time. The cutout tapers wider toward the inside face, letting the button settle naturally into the gap and making it easier to lift the cap off the mount.
 
 ## Features
@@ -60,6 +60,7 @@ Open `cap-wall-mount.scad` in [OpenSCAD](https://openscad.org/) and edit the par
 
 | Parameter | Default | Description |
 |---|---|---|
+| `inner_arc_enabled` | true | Toggle the inner arc wall on/off |
 | `arc_radius` | 80 mm | Outer radius of the outer arc wall |
 | `arc_sweep` | 38° | Half-sweep angle from apex (total arc = 2×) |
 | `arc_wall_thickness` | 2.25 mm | Thickness of each arc wall |

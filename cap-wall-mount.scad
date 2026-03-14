@@ -43,6 +43,7 @@ countersink_depth        = 2;     // mm – depth of the tapered countersink
 countersink_extra_dia    = 4.25;     // mm – how much wider the countersink is than the hole
 
 // Arc channel (cap cradle) — concentric partial rings in XY, extruded in Z
+inner_arc_enabled        = true;  // Whether to include the inner arc wall
 arc_radius               = 80;    // mm – outer radius of outer wall 
 arc_sweep                = 38;    // deg – half-sweep from apex (total swing = 2×this)
 arc_wall_thickness       = 2.25;     // mm – thickness of each arc wall
@@ -306,8 +307,9 @@ module arch_channel() {
                     arc_ring(_outer_wall_inner_r, arc_wall_thickness,
                              _outer_arc_total_z, arc_sweep);
                     // Inner wall
-                    arc_ring(_inner_wall_inner_r, arc_wall_thickness,
-                             _inner_arc_total_z, arc_sweep);
+                    if (inner_arc_enabled)
+                        arc_ring(_inner_wall_inner_r, arc_wall_thickness,
+                                 _inner_arc_total_z, arc_sweep);
 
                     // Strap ridge on outer face of outer wall at front edge (curved profile)
                     if (strap_ridge_enabled)
@@ -318,7 +320,7 @@ module arch_channel() {
                                       arc_sweep);
 
                     // Ridge on inner arc wall (protrudes outward into channel)
-                    if (inner_ridge_enabled)
+                    if (inner_arc_enabled && inner_ridge_enabled)
                         translate([0, 0, _inner_arc_total_z - inner_ridge_width])
                             arc_ridge(_inner_wall_outer_r,
                                       inner_ridge_height,
