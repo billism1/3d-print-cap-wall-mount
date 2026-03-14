@@ -59,6 +59,11 @@ strap_ridge_width        = 4;     // mm – width of the ridge along the Z axis
 inner_ridge_enabled      = true;  // Whether to add a ridge on the inner arc
 inner_ridge_height       = 3;     // mm – how far the ridge protrudes outward (into the channel)
 
+// Button cutout (gap at apex of outer arc for cap button)
+button_cutout_enabled    = true;  // Whether to cut a button slot in the outer arc
+button_cutout_width      = 17;    // mm – width of the cutout in X
+button_cutout_height     = 20;    // mm – height of the cutout from plate surface in Z
+
 // Build flags
 build_main               = true;  // Render the mount
 
@@ -237,39 +242,78 @@ module backplate() {
     }
 }
 
+// Button cutout volume: arched-top slot at apex of outer arc
+// The arch ramps upward toward the inner (-Y) face for easy button entry.
+// Bottom stays flush with the backplate on both faces.
+module _button_cutout() {
+    _cut_r = button_cutout_width / 2;
+    _cut_straight = button_cutout_height - _cut_r;
+    _taper = 3;  // mm – extra arch height on the inner face
+    // Position: cut through outer wall at apex (+Y side)
+    _wall_y = _arc_center_y + arc_radius + 1;
+    _depth = arc_wall_thickness + 2;
+    translate([0, _wall_y, plate_thickness])
+        rotate([90, 0, 0])
+            hull() {
+                // Outer face — original height, bottom at Y=0
+                linear_extrude(height = 0.01)
+                    hull() {
+                        translate([-_cut_r, 0])
+                            square([button_cutout_width, max(_cut_straight, 0.01)]);
+                        translate([0, _cut_straight])
+                            circle(r = _cut_r);
+                    }
+                // Inner face — taller (bottom still at Y=0, arch raised)
+                translate([0, 0, _depth])
+                    linear_extrude(height = 0.01)
+                        hull() {
+                            translate([-_cut_r, 0])
+                                square([button_cutout_width, max(_cut_straight + _taper, 0.01)]);
+                            translate([0, _cut_straight + _taper])
+                                circle(r = _cut_r);
+                        }
+            }
+}
+
 // Concentric arc channel: outer wall + inner wall, clipped to plate width
 module arch_channel() {
-    intersection() {
-        // Clip arcs to tapered plate outline
-        translate([0, 0, -0.01])
-            linear_extrude(height = _arc_total_z + 0.02)
-                _plate_profile_2d();
+    difference() {
+        intersection() {
+            // Clip arcs to tapered plate outline
+            translate([0, 0, -0.01])
+                linear_extrude(height = _arc_total_z + 0.02)
+                    _plate_profile_2d();
 
-        translate([0, _arc_center_y, 0])
-            union() {
-                // Outer wall
-                arc_ring(_outer_wall_inner_r, arc_wall_thickness,
-                         _arc_total_z, arc_sweep);
-                // Inner wall
-                arc_ring(_inner_wall_inner_r, arc_wall_thickness,
-                         _arc_total_z, arc_sweep);
+            translate([0, _arc_center_y, 0])
+                union() {
+                    // Outer wall
+                    arc_ring(_outer_wall_inner_r, arc_wall_thickness,
+                             _arc_total_z, arc_sweep);
+                    // Inner wall
+                    arc_ring(_inner_wall_inner_r, arc_wall_thickness,
+                             _arc_total_z, arc_sweep);
 
-                // Strap ridge on outer face of outer wall at front edge (curved profile)
-                if (strap_ridge_enabled)
-                    translate([0, 0, _arc_total_z - strap_ridge_width])
-                        arc_ridge(arc_radius,
-                                  strap_ridge_height,
-                                  strap_ridge_width,
-                                  arc_sweep);
+                    // Strap ridge on outer face of outer wall at front edge (curved profile)
+                    if (strap_ridge_enabled)
+                        translate([0, 0, _arc_total_z - strap_ridge_width])
+                            arc_ridge(arc_radius,
+                                      strap_ridge_height,
+                                      strap_ridge_width,
+                                      arc_sweep);
 
-                // Ridge on inner arc wall (protrudes outward into channel)
-                if (inner_ridge_enabled)
-                    translate([0, 0, _arc_total_z - strap_ridge_width])
-                        arc_ridge(_inner_wall_outer_r,
-                                  inner_ridge_height,
-                                  strap_ridge_width,
-                                  arc_sweep);
-            }
+                    // Ridge on inner arc wall (protrudes outward into channel)
+                    if (inner_ridge_enabled)
+                        translate([0, 0, _arc_total_z - strap_ridge_width])
+                            arc_ridge(_inner_wall_outer_r,
+                                      inner_ridge_height,
+                                      strap_ridge_width,
+                                      arc_sweep);
+                }
+        }
+
+        // Cut button slot at apex of outer arc
+        if (button_cutout_enabled)
+            _button_cutout();
     }
 }
 
