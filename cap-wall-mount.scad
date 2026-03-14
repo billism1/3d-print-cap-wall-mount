@@ -36,6 +36,11 @@ bottom_screw_hole_enabled = true;  // Whether to include the bottom screw hole
 bottom_screw_hole_diameter = 5;    // mm – diameter of bottom screw hole
 bottom_screw_hole_offset = 6;     // mm – gap between keyhole bottom edge and screw hole edge
 
+// Countersink (tapered recess for drywall screw heads)
+countersink_enabled      = true;  // Whether to add tapered countersinks
+countersink_depth        = 2;     // mm – depth of the tapered countersink
+countersink_extra_dia    = 4;     // mm – how much wider the countersink is than the hole
+
 // Arc channel (cap cradle) — concentric partial rings in XY, extruded in Z
 arc_radius               = 80;    // mm – outer radius of outer wall 
 arc_sweep                = 38;    // deg – half-sweep from apex (total swing = 2×this)
@@ -127,10 +132,38 @@ module keyhole() {
                 cylinder(d = keyhole_top_width, h = plate_thickness + 0.02);
         }
 
+        // Countersink on keyhole narrow slot (wall side)
+        if (countersink_enabled) {
+            // Tapered recess along the narrow slot
+            hull() {
+                translate([0, _keyhole_bottom_cy, plate_thickness - countersink_depth])
+                    cylinder(d1 = keyhole_top_width,
+                             d2 = keyhole_top_width + countersink_extra_dia,
+                             h = countersink_depth + 0.02);
+                translate([0, _keyhole_top_cy, plate_thickness - countersink_depth])
+                    cylinder(d1 = keyhole_top_width,
+                             d2 = keyhole_top_width + countersink_extra_dia,
+                             h = countersink_depth + 0.02);
+            }
+            // Tapered recess on bottom circle
+            translate([0, _keyhole_bottom_cy, plate_thickness - countersink_depth])
+                cylinder(d1 = keyhole_bottom_diameter,
+                         d2 = keyhole_bottom_diameter + countersink_extra_dia,
+                         h = countersink_depth + 0.02);
+        }
+
         // Bottom screw hole
-        if (bottom_screw_hole_enabled)
+        if (bottom_screw_hole_enabled) {
             translate([0, _keyhole_bottom_cy - _keyhole_bottom_r - bottom_screw_hole_diameter / 2 - bottom_screw_hole_offset, 0])
                 cylinder(d = bottom_screw_hole_diameter, h = plate_thickness + 0.02);
+
+            // Countersink on bottom screw hole
+            if (countersink_enabled)
+                translate([0, _keyhole_bottom_cy - _keyhole_bottom_r - bottom_screw_hole_diameter / 2 - bottom_screw_hole_offset, plate_thickness - countersink_depth])
+                    cylinder(d1 = bottom_screw_hole_diameter,
+                             d2 = bottom_screw_hole_diameter + countersink_extra_dia,
+                             h = countersink_depth + 0.02);
+        }
     }
 }
 
