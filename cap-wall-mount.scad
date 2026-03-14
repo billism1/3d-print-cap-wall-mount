@@ -51,8 +51,8 @@ arc_top_inset            = 2;     // mm – distance from plate top edge to arc 
 
 // Strap ridge (prevents cap back strap from sliding forward off the arc)
 strap_ridge_enabled      = true;  // Whether to add a ridge on the outer arc
-strap_ridge_height       = 3;     // mm – how far the ridge protrudes inward (into the channel)
-strap_ridge_width        = 2;     // mm – width of the ridge along the Z axis
+strap_ridge_height       = 2;     // mm – how far the ridge protrudes inward (into the channel)
+strap_ridge_width        = 4;     // mm – width of the ridge along the Z axis
 
 // Build flags
 build_main               = true;  // Render the mount
@@ -105,6 +105,22 @@ module rounded_rect_centred(size, r) {
                 translate([x, y, 0])
                     cylinder(r = r, h = size.z);
         }
+}
+
+// Partial ring with a curved (quarter-circle) cross-section for smooth ridge.
+// Sits at outer radius `radius`, curves outward by `height` and along Z by `width`.
+module arc_ridge(radius, height, width, sweep) {
+    _ridge_steps = 16;
+    rotate([0, 0, 90 - sweep])
+        rotate_extrude(angle = 2 * sweep)
+            translate([radius, 0])
+                polygon([
+                    [0, 0],
+                    for (i = [0 : _ridge_steps])
+                        let(a = 90 * i / _ridge_steps)
+                        [height * (1 - cos(a)), width * sin(a)],
+                    [0, width]
+                ]);
 }
 
 // Partial ring in XY plane, symmetric about +Y axis, extruded in +Z.
@@ -201,13 +217,13 @@ module arch_channel() {
                 arc_ring(_inner_wall_inner_r, arc_wall_thickness,
                          _arc_total_z, arc_sweep);
 
-                // Strap ridge on outer face of outer wall at front edge
+                // Strap ridge on outer face of outer wall at front edge (curved profile)
                 if (strap_ridge_enabled)
                     translate([0, 0, _arc_total_z - strap_ridge_width])
-                        arc_ring(arc_radius,
-                                 strap_ridge_height,
-                                 strap_ridge_width,
-                                 arc_sweep);
+                        arc_ridge(arc_radius,
+                                  strap_ridge_height,
+                                  strap_ridge_width,
+                                  arc_sweep);
             }
     }
 }
