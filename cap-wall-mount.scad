@@ -49,6 +49,11 @@ arc_channel_gap          = 10;    // mm – gap between walls (folded cap fits h
 arc_extrusion            = 25;    // mm – how far arcs extend forward from plate face
 arc_top_inset            = 2;     // mm – distance from plate top edge to arc apex
 
+// Strap ridge (prevents cap back strap from sliding forward off the arc)
+strap_ridge_enabled      = true;  // Whether to add a ridge on the outer arc
+strap_ridge_height       = 3;     // mm – how far the ridge protrudes inward (into the channel)
+strap_ridge_width        = 2;     // mm – width of the ridge along the Z axis
+
 // Build flags
 build_main               = true;  // Render the mount
 
@@ -195,6 +200,14 @@ module arch_channel() {
                 // Inner wall
                 arc_ring(_inner_wall_inner_r, arc_wall_thickness,
                          _arc_total_z, arc_sweep);
+
+                // Strap ridge on outer face of outer wall at front edge
+                if (strap_ridge_enabled)
+                    translate([0, 0, _arc_total_z - strap_ridge_width])
+                        arc_ring(arc_radius,
+                                 strap_ridge_height,
+                                 strap_ridge_width,
+                                 arc_sweep);
             }
     }
 }
