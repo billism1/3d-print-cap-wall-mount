@@ -58,7 +58,8 @@ strap_ridge_width        = 4;     // mm – width of the ridge along the Z axis
 
 // Inner arc ridge (matching ridge on the inner/lower arc wall)
 inner_ridge_enabled      = true;  // Whether to add a ridge on the inner arc
-inner_ridge_height       = 3;     // mm – how far the ridge protrudes outward (into the channel)
+inner_ridge_height       = 1;     // mm – how far the ridge protrudes outward (into the channel)
+inner_ridge_width        = 4;     // mm – width of the inner ridge along the Z axis
 
 // Button cutout (gap at apex of outer arc for cap button)
 button_cutout_enabled    = true;  // Whether to cut a button slot in the outer arc
@@ -305,10 +306,10 @@ module arch_channel() {
 
                     // Ridge on inner arc wall (protrudes outward into channel)
                     if (inner_ridge_enabled)
-                        translate([0, 0, _inner_arc_total_z - strap_ridge_width])
+                        translate([0, 0, _inner_arc_total_z - inner_ridge_width])
                             arc_ridge(_inner_wall_outer_r,
                                       inner_ridge_height,
-                                      strap_ridge_width,
+                                      inner_ridge_width,
                                       arc_sweep);
                 }
         }
