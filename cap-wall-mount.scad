@@ -23,6 +23,7 @@ plate_width              = 50;    // mm – plate width  (X axis)
 plate_height             = 50;    // mm – plate height (Y axis)
 plate_thickness          = 4;     // mm – plate thickness (Z axis)
 plate_corner_radius      = 4;     // mm – fillet radius on plate corners
+plate_taper_angle        = 20;    // deg – taper angle from vertical (use multiple of 10 for easy print rotation)
 
 // Keyhole screw slot 
 screw_holes_enabled      = true;  // Whether to include the keyhole and screw holes
@@ -80,7 +81,11 @@ _arc_endpoint_x          = arc_radius * sin(arc_sweep);
 
 // Tapered plate: narrows from full width at arc apex to narrow bottom
 _taper_start_y           = plate_height / 2 - arc_top_inset; // Y where taper begins
-_bottom_plate_width      = 2 * bottom_screw_hole_diameter;   // width at bottom edge
+_taper_run               = _taper_start_y + plate_height / 2; // vertical distance of taper
+_bottom_plate_width      = max(
+    2 * bottom_screw_hole_diameter,  // minimum: must fit bottom screw hole
+    plate_width - 2 * _taper_run * tan(plate_taper_angle)
+);  // width at bottom edge, derived from taper angle
 
 echo(str("Channel gap: ", arc_channel_gap, " mm"));
 echo(str("Outer wall: R ", _outer_wall_inner_r, " to ", arc_radius));
