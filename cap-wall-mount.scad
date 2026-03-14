@@ -30,6 +30,11 @@ keyhole_bottom_diameter  = 8;     // mm – wide hole for screw head
 keyhole_top_width        = 5;     // mm – narrow slot for screw shaft
 keyhole_offset_y         = -5;    // mm – vertical offset from plate centre
 
+// Bottom screw hole (below keyhole)
+bottom_screw_hole_enabled = true;  // Whether to include the bottom screw hole
+bottom_screw_hole_diameter = 5;    // mm – diameter of bottom screw hole
+bottom_screw_hole_offset = 6;     // mm – gap between keyhole bottom edge and screw hole edge
+
 // Arc channel (cap cradle) — concentric partial rings in XY, extruded in Z
 arc_radius               = 40;    // mm – outer radius of outer wall
 arc_sweep                = 38;    // deg – half-sweep from apex (total swing = 2×this)
@@ -120,6 +125,11 @@ module keyhole() {
             translate([0, _keyhole_top_cy, 0])
                 cylinder(d = keyhole_top_width, h = plate_thickness + 0.02);
         }
+
+        // Bottom screw hole
+        if (bottom_screw_hole_enabled)
+            translate([0, _keyhole_bottom_cy - _keyhole_bottom_r - bottom_screw_hole_diameter / 2 - bottom_screw_hole_offset, 0])
+                cylinder(d = bottom_screw_hole_diameter, h = plate_thickness + 0.02);
     }
 }
 
