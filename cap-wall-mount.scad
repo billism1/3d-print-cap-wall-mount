@@ -19,7 +19,7 @@
 // ---------------------------------------------------------------------------
 
 // Backplate
-plate_width              = 50;    // mm – plate width  (X axis)
+plate_width              = 45;    // mm – plate width  (X axis)
 plate_height             = 50;    // mm – plate height (Y axis)
 plate_thickness          = 4;     // mm – plate thickness (Z axis)
 plate_corner_radius      = 4;     // mm – fillet radius on plate corners
@@ -46,14 +46,18 @@ countersink_extra_dia    = 4;     // mm – how much wider the countersink is th
 arc_radius               = 80;    // mm – outer radius of outer wall 
 arc_sweep                = 38;    // deg – half-sweep from apex (total swing = 2×this)
 arc_wall_thickness       = 2.25;     // mm – thickness of each arc wall
-arc_channel_gap          = 10;    // mm – gap between walls (folded cap fits here)
+arc_channel_gap          = 9;    // mm – gap between walls (folded cap fits here)
 arc_extrusion            = 25;    // mm – how far arcs extend forward from plate face
 arc_top_inset            = 2;     // mm – distance from plate top edge to arc apex
 
 // Strap ridge (prevents cap back strap from sliding forward off the arc)
 strap_ridge_enabled      = true;  // Whether to add a ridge on the outer arc
-strap_ridge_height       = 5;     // mm – how far the ridge protrudes inward (into the channel)
+strap_ridge_height       = 7;     // mm – how far the ridge protrudes outward
 strap_ridge_width        = 4;     // mm – width of the ridge along the Z axis
+
+// Inner arc ridge (matching ridge on the inner/lower arc wall)
+inner_ridge_enabled      = true;  // Whether to add a ridge on the inner arc
+inner_ridge_height       = 3;     // mm – how far the ridge protrudes outward (into the channel)
 
 // Build flags
 build_main               = true;  // Render the mount
@@ -255,6 +259,14 @@ module arch_channel() {
                     translate([0, 0, _arc_total_z - strap_ridge_width])
                         arc_ridge(arc_radius,
                                   strap_ridge_height,
+                                  strap_ridge_width,
+                                  arc_sweep);
+
+                // Ridge on inner arc wall (protrudes outward into channel)
+                if (inner_ridge_enabled)
+                    translate([0, 0, _arc_total_z - strap_ridge_width])
+                        arc_ridge(_inner_wall_outer_r,
+                                  inner_ridge_height,
                                   strap_ridge_width,
                                   arc_sweep);
             }
