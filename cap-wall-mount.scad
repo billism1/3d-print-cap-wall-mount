@@ -50,6 +50,7 @@ arc_channel_gap          = 9.5;    // mm – gap between walls (folded cap fits 
 outer_arc_extrusion      = 25;    // mm – how far outer arc extends forward from plate face
 inner_arc_extrusion      = 20;    // mm – how far inner arc extends forward from plate face
 arc_top_inset            = 2;     // mm – distance from plate top edge to arc apex
+arc_wall_fillet          = 1;     // mm – fillet radius on arc wall cross-section corners
 
 // Strap ridge (prevents cap back strap from sliding forward off the arc)
 strap_ridge_enabled      = true;  // Whether to add a ridge on the outer arc
@@ -174,11 +175,23 @@ module arc_ridge(radius, height, width, sweep) {
 //   wall_t : wall thickness (radial direction, outward)
 //   height : Z extent (extrusion depth)
 //   sweep  : half-sweep angle from +Y apex
-module arc_ring(radius, wall_t, height, sweep) {
+//
+// The cross-section is a rounded square (offset trick rounds all corners).
+// Rounding the top-outer corner creates a small crevice where ridges attach,
+// so a half-width square is unioned on the outer half to fill that gap and
+// keep the outer face flush at full height.
+module arc_ring(radius, wall_t, height, sweep, fillet = arc_wall_fillet) {
     rotate([0, 0, 90 - sweep])
         rotate_extrude(angle = 2 * sweep)
             translate([radius, 0])
-                square([wall_t, height]);
+            union() {
+                // Fill the crevice left by rounding on the outer (top/+X) half
+                translate([wall_t / 2, 0])
+                    square([wall_t / 2, height]);
+                // Rounded wall profile — fillets all four corners
+                offset(r = fillet) offset(delta = -fillet)
+                    square([wall_t, height]);
+            }
 }
 
 // ---------------------------------------------------------------------------
