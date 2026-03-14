@@ -1,6 +1,6 @@
 # Cap Wall Mount – Hat Display System
 
-A 3D-printable, parametric wall mount for displaying baseball caps. Fold a cap in half and slide its brim into the channel formed by two concentric arc walls — the cap hangs securely from a single screw via a keyhole slot on the backplate. Mount several in a grid on your wall for easy display and selection.
+A 3D-printable, parametric wall mount for displaying baseball caps. Fold a cap in half and slide its brim into the channel formed by two concentric arc walls — the cap hangs from a keyhole screw slot on the backplate, with an optional second screw hole below for extra security. The tapered backplate is designed to print on its side so FDM layer lines run along the arc walls for maximum strength. Mount several in a grid on your wall for easy display and selection.
 
 ![Cap Wall Mount preview](images/openscad_screenshot_01.png)
 
@@ -15,7 +15,8 @@ The mount has three main parts:
 ## Features
 
 - **Fully parametric** — every dimension is adjustable at the top of the `.scad` file.
-- **FDM-friendly** — designed to print flat (backplate on the bed) without supports.
+- **Designed for strength** — intended to be printed on its side (tapered edge down) so that FDM layer lines run along the length of the arc walls rather than across them. This means the load from the hanging cap is carried in shear along the layers, not in tension across layer bonds — which is the weakest point of any FDM print. The result is arc walls that are far more resistant to snapping under load.
+- **Tapered backplate** — the plate narrows toward the bottom at a configurable angle (`plate_taper_angle`, default 20°). This reduces material use and gives you a flat edge to place on the print bed when printing on its side. The angle is a clean multiple of 10° so rotation in the slicer is straightforward.
 - **Grid-ready** — mount multiples in rows/columns on a wall.
 - **Keyhole mounting** — hang on a single drywall screw; optional second screw hole for extra security.
 - **Countersinks** — tapered recesses so screw heads sit flush against the wall.
@@ -33,6 +34,7 @@ Open `cap-wall-mount.scad` in [OpenSCAD](https://openscad.org/) and edit the par
 | `plate_height` | 50 mm | Height of the backplate (Y axis) |
 | `plate_thickness` | 4 mm | Thickness of the backplate (Z axis) |
 | `plate_corner_radius` | 4 mm | Fillet radius on the plate corners |
+| `plate_taper_angle` | 20° | Taper angle from vertical (use a multiple of 10 for easy slicer rotation) |
 
 ### Screw Holes
 
@@ -75,7 +77,7 @@ Open `cap-wall-mount.scad` in [OpenSCAD](https://openscad.org/) and edit the par
 2. Adjust parameters at the top of the file to fit your caps and screws.
 3. Preview (**F5**) to check the shape, then render (**F6**).
 4. Export to STL (**F7**).
-5. Slice and print — lay the backplate flat on the print bed, no supports needed.
+5. Slice and print — rotate the model in your slicer so the tapered edge sits flat on the print bed (rotate by `plate_taper_angle`, default 20°). This orients the layer lines along the arc walls for maximum strength.
 6. Drive a drywall screw into the wall, hang the mount via the keyhole, and slide a folded cap into the channel.
 
 ## License
