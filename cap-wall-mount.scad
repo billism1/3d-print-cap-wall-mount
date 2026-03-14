@@ -27,14 +27,14 @@ plate_taper_angle        = 20;    // deg – taper angle from vertical (use mult
 
 // Keyhole screw slot 
 screw_holes_enabled      = true;  // Whether to include the keyhole and screw holes
-keyhole_total_height     = 10;    // mm – total height of keyhole slot
-keyhole_bottom_diameter  = 5;     // mm – wide hole for screw head
-keyhole_top_width        = 3;     // mm – narrow slot for screw shaft
-keyhole_top_inset        = 20;     // mm – distance from plate top edge to keyhole top
+keyhole_total_height     = 13;    // mm – total height of keyhole slot
+keyhole_bottom_diameter  = 8.5;     // mm – wide hole for screw head
+keyhole_top_width        = 4;     // mm – narrow slot for screw shaft
+keyhole_top_inset        = 22;     // mm – distance from plate top edge to keyhole top
 
 // Bottom screw hole (below keyhole)
 bottom_screw_hole_enabled = true;  // Whether to include the bottom screw hole
-bottom_screw_hole_diameter = 3;    // mm – diameter of bottom screw hole
+bottom_screw_hole_diameter = 4;    // mm – diameter of bottom screw hole
 bottom_screw_hole_offset = 6;     // mm – gap between keyhole bottom edge and screw hole edge
 
 // Countersink (tapered recess for drywall screw heads)
