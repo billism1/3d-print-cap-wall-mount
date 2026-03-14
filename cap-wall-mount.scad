@@ -21,7 +21,7 @@
 // Backplate
 plate_width              = 45;    // mm – plate width  (X axis)
 plate_height             = 50;    // mm – plate height (Y axis)
-plate_thickness          = 4;     // mm – plate thickness (Z axis)
+plate_thickness          = 3;     // mm – plate thickness (Z axis)
 plate_corner_radius      = 4;     // mm – fillet radius on plate corners
 plate_taper_angle        = 20;    // deg – taper angle from vertical (use multiple of 10 for easy print rotation)
 
