@@ -36,7 +36,7 @@ bottom_screw_hole_diameter = 5;    // mm – diameter of bottom screw hole
 bottom_screw_hole_offset = 6;     // mm – gap between keyhole bottom edge and screw hole edge
 
 // Arc channel (cap cradle) — concentric partial rings in XY, extruded in Z
-arc_radius               = 40;    // mm – outer radius of outer wall
+arc_radius               = 80;    // mm – outer radius of outer wall
 arc_sweep                = 38;    // deg – half-sweep from apex (total swing = 2×this)
 arc_wall_thickness       = 3;     // mm – thickness of each arc wall
 arc_channel_gap          = 10;    // mm – gap between walls (folded cap fits here)
@@ -144,10 +144,14 @@ module backplate() {
     }
 }
 
-// Concentric arc channel: outer wall + inner wall with button cutout
+// Concentric arc channel: outer wall + inner wall, clipped to plate width
 module arch_channel() {
-    translate([0, _arc_center_y, 0])
-        difference() {
+    intersection() {
+        // Clip to plate width in X
+        translate([-plate_width / 2, -arc_radius * 2, -0.01])
+            cube([plate_width, arc_radius * 4, _arc_total_z + 0.02]);
+
+        translate([0, _arc_center_y, 0])
             union() {
                 // Outer wall
                 arc_ring(_outer_wall_inner_r, arc_wall_thickness,
@@ -156,7 +160,7 @@ module arch_channel() {
                 arc_ring(_inner_wall_inner_r, arc_wall_thickness,
                          _arc_total_z, arc_sweep);
             }
-        }
+    }
 }
 
 // Full cap mount assembly
