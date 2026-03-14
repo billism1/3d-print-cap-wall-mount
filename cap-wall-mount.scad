@@ -109,18 +109,30 @@ module rounded_rect_centred(size, r) {
 
 // Partial ring with a curved (quarter-circle) cross-section for smooth ridge.
 // Sits at outer radius `radius`, curves outward by `height` and along Z by `width`.
+// The tip is rounded by an offset-round technique.
 module arc_ridge(radius, height, width, sweep) {
     _ridge_steps = 16;
+    _tip_r = min(height, width) * 0.3;  // rounding radius for the sharp tip
+    _ext = _tip_r * 2;                  // base extension to hide offset erosion
     rotate([0, 0, 90 - sweep])
         rotate_extrude(angle = 2 * sweep)
             translate([radius, 0])
-                polygon([
-                    [0, 0],
-                    for (i = [0 : _ridge_steps])
-                        let(a = 90 * i / _ridge_steps)
-                        [height * (1 - cos(a)), width * sin(a)],
-                    [0, width]
-                ]);
+                intersection() {
+                    // Keep only the positive-X region (don't bleed into wall)
+                    square([height + 1, width + 1]);
+                    // Round outer corners; base edges extend deep into wall
+                    // so offset erosion artifacts are fully clipped away
+                    offset(r = _tip_r) offset(delta = -_tip_r)
+                        polygon([
+                            [-_ext, -_ext],
+                            [-_ext, 0],
+                            for (i = [0 : _ridge_steps])
+                                let(a = 90 * i / _ridge_steps)
+                                [height * (1 - cos(a)), width * sin(a)],
+                            [-_ext, width],
+                            [-_ext, width + _ext]
+                        ]);
+                }
 }
 
 // Partial ring in XY plane, symmetric about +Y axis, extruded in +Z.
