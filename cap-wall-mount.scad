@@ -46,7 +46,7 @@ countersink_extra_dia    = 4;     // mm – how much wider the countersink is th
 arc_radius               = 80;    // mm – outer radius of outer wall 
 arc_sweep                = 38;    // deg – half-sweep from apex (total swing = 2×this)
 arc_wall_thickness       = 2.25;     // mm – thickness of each arc wall
-arc_channel_gap          = 9;    // mm – gap between walls (folded cap fits here)
+arc_channel_gap          = 9.5;    // mm – gap between walls (folded cap fits here)
 arc_extrusion            = 25;    // mm – how far arcs extend forward from plate face
 arc_top_inset            = 2;     // mm – distance from plate top edge to arc apex
 
