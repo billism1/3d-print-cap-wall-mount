@@ -6,7 +6,7 @@ A 3D-printable, parametric wall mount for displaying baseball caps. Fold a cap i
 
 ## How It Works
 
-The mount has three main parts:
+The mount has four main parts:
 
 1. **Backplate** — a flat plate with rounded corners that sits flush against the wall. It includes a keyhole screw slot (and optional bottom screw hole) so you can hang it on a drywall screw.
 2. **Arc channel** — two concentric curved walls that extend forward from the backplate. They form a channel sized to hold a folded baseball cap by its brim/edge. The walls have filleted lower edges for smoother cap insertion and removal.
@@ -22,6 +22,7 @@ The mount has three main parts:
 - **Keyhole mounting** — hang on a single drywall screw; optional second screw hole for extra security.
 - **Countersinks** — tapered recesses so screw heads sit flush against the wall.
 - **Strap ridge** — keeps the cap's back strap from sliding off.
+- **Inner arc ridge** — a small bump on the inner wall that helps hold the cap brim in the channel.
 - **Button cutout** — prevents long-term compression of the cap's top button.
 - **Filleted arc walls** — rounded lower edges on the arc walls for smoother cap insertion and removal.
 
@@ -33,9 +34,9 @@ Open `cap-wall-mount.scad` in [OpenSCAD](https://openscad.org/) and edit the par
 
 | Parameter | Default | Description |
 |---|---|---|
-| `plate_width` | 50 mm | Width of the backplate (X axis) |
+| `plate_width` | 45 mm | Width of the backplate (X axis) |
 | `plate_height` | 50 mm | Height of the backplate (Y axis) |
-| `plate_thickness` | 4 mm | Thickness of the backplate (Z axis) |
+| `plate_thickness` | 3 mm | Thickness of the backplate (Z axis) |
 | `plate_corner_radius` | 4 mm | Fillet radius on the plate corners |
 | `plate_taper_angle` | 20° | Taper angle from vertical (use a multiple of 10 for easy slicer rotation) |
 
@@ -45,11 +46,11 @@ Open `cap-wall-mount.scad` in [OpenSCAD](https://openscad.org/) and edit the par
 |---|---|---|
 | `screw_holes_enabled` | true | Toggle all screw holes on/off |
 | `keyhole_total_height` | 13 mm | Total height of the keyhole slot |
-| `keyhole_bottom_diameter` | 8 mm | Diameter of the wide circle (screw head) |
-| `keyhole_top_width` | 5 mm | Width of the narrow slot (screw shaft) |
-| `keyhole_top_inset` | 20 mm | Distance from plate top edge to keyhole top |
+| `keyhole_bottom_diameter` | 8.5 mm | Diameter of the wide circle (screw head) |
+| `keyhole_top_width` | 4 mm | Width of the narrow slot (screw shaft) |
+| `keyhole_top_inset` | 21 mm | Distance from plate top edge to keyhole top |
 | `bottom_screw_hole_enabled` | true | Toggle the bottom screw hole |
-| `bottom_screw_hole_diameter` | 5 mm | Diameter of the bottom screw hole |
+| `bottom_screw_hole_diameter` | 4 mm | Diameter of the bottom screw hole |
 | `bottom_screw_hole_offset` | 6 mm | Gap between keyhole bottom and screw hole |
 | `countersink_enabled` | true | Toggle countersink tapers on screw holes |
 | `countersink_depth` | 2 mm | Depth of the countersink taper |
@@ -62,17 +63,35 @@ Open `cap-wall-mount.scad` in [OpenSCAD](https://openscad.org/) and edit the par
 | `arc_radius` | 80 mm | Outer radius of the outer arc wall |
 | `arc_sweep` | 38° | Half-sweep angle from apex (total arc = 2×) |
 | `arc_wall_thickness` | 2.25 mm | Thickness of each arc wall |
-| `arc_channel_gap` | 10 mm | Gap between inner and outer walls (cap fits here) |
-| `arc_extrusion` | 25 mm | How far the arcs extend forward from the plate |
+| `arc_channel_gap` | 9 mm | Gap between inner and outer walls (cap fits here) |
+| `outer_arc_extrusion` | 25 mm | How far the outer arc extends forward from the plate |
+| `inner_arc_extrusion` | 20 mm | How far the inner arc extends forward from the plate |
 | `arc_top_inset` | 2 mm | Distance from plate top edge to arc apex |
+| `arc_wall_fillet` | 1.1 mm | Fillet radius on arc wall cross-section corners |
 
 ### Strap Ridge
 
 | Parameter | Default | Description |
 |---|---|---|
 | `strap_ridge_enabled` | true | Toggle the strap ridge on/off |
-| `strap_ridge_height` | 5 mm | How far the ridge protrudes outward |
+| `strap_ridge_height` | 7 mm | How far the ridge protrudes outward |
 | `strap_ridge_width` | 4 mm | Width of the ridge along the Z axis |
+
+### Inner Arc Ridge
+
+| Parameter | Default | Description |
+|---|---|---|
+| `inner_ridge_enabled` | true | Toggle the inner arc ridge on/off |
+| `inner_ridge_height` | 1 mm | How far the ridge protrudes into the channel |
+| `inner_ridge_width` | 3 mm | Width of the inner ridge along the Z axis |
+
+### Button Cutout
+
+| Parameter | Default | Description |
+|---|---|---|
+| `button_cutout_enabled` | true | Toggle the button cutout on/off |
+| `button_cutout_width` | 17 mm | Width of the cutout in X |
+| `button_cutout_height` | 15 mm | Height of the cutout from the plate surface in Z |
 
 ## Usage
 
