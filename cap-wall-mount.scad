@@ -78,6 +78,10 @@ _arc_center_y            = plate_height / 2 - arc_top_inset - arc_radius;
 // Arc endpoint positions (where the arc ends meet the plate)
 _arc_endpoint_x          = arc_radius * sin(arc_sweep);
 
+// Tapered plate: narrows from full width at arc apex to narrow bottom
+_taper_start_y           = plate_height / 2 - arc_top_inset; // Y where taper begins
+_bottom_plate_width      = 2 * bottom_screw_hole_diameter;   // width at bottom edge
+
 echo(str("Channel gap: ", arc_channel_gap, " mm"));
 echo(str("Outer wall: R ", _outer_wall_inner_r, " to ", arc_radius));
 echo(str("Inner wall: R ", _inner_wall_inner_r, " to ", _inner_wall_outer_r));
@@ -105,6 +109,19 @@ module rounded_rect_centred(size, r) {
                 translate([x, y, 0])
                     cylinder(r = r, h = size.z);
         }
+}
+
+// 2D profile of the tapered backplate (full width at top, narrow at bottom)
+module _plate_profile_2d() {
+    offset(r = plate_corner_radius) offset(delta = -plate_corner_radius)
+        polygon([
+            [-plate_width / 2,          plate_height / 2],
+            [ plate_width / 2,          plate_height / 2],
+            [ plate_width / 2,          _taper_start_y],
+            [ _bottom_plate_width / 2, -plate_height / 2],
+            [-_bottom_plate_width / 2, -plate_height / 2],
+            [-plate_width / 2,          _taper_start_y]
+        ]);
 }
 
 // Partial ring with a curved (quarter-circle) cross-section for smooth ridge.
@@ -201,13 +218,11 @@ module keyhole() {
     }
 }
 
-// Backplate with keyhole
+// Backplate with keyhole (tapered shape)
 module backplate() {
     difference() {
-        rounded_rect_centred(
-            [plate_width, plate_height, plate_thickness],
-            plate_corner_radius
-        );
+        linear_extrude(height = plate_thickness)
+            _plate_profile_2d();
         if (screw_holes_enabled)
             keyhole();
     }
@@ -216,9 +231,10 @@ module backplate() {
 // Concentric arc channel: outer wall + inner wall, clipped to plate width
 module arch_channel() {
     intersection() {
-        // Clip to plate width in X
-        translate([-plate_width / 2, -arc_radius * 2, -0.01])
-            cube([plate_width, arc_radius * 4, _arc_total_z + 0.02]);
+        // Clip arcs to tapered plate outline
+        translate([0, 0, -0.01])
+            linear_extrude(height = _arc_total_z + 0.02)
+                _plate_profile_2d();
 
         translate([0, _arc_center_y, 0])
             union() {
