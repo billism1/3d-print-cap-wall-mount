@@ -47,7 +47,8 @@ arc_radius               = 80;    // mm – outer radius of outer wall
 arc_sweep                = 38;    // deg – half-sweep from apex (total swing = 2×this)
 arc_wall_thickness       = 2.25;     // mm – thickness of each arc wall
 arc_channel_gap          = 9.5;    // mm – gap between walls (folded cap fits here)
-arc_extrusion            = 25;    // mm – how far arcs extend forward from plate face
+outer_arc_extrusion      = 25;    // mm – how far outer arc extends forward from plate face
+inner_arc_extrusion      = 20;    // mm – how far inner arc extends forward from plate face
 arc_top_inset            = 2;     // mm – distance from plate top edge to arc apex
 
 // Strap ridge (prevents cap back strap from sliding forward off the arc)
@@ -80,7 +81,8 @@ _inner_wall_outer_r      = _outer_wall_inner_r - arc_channel_gap;
 _inner_wall_inner_r      = _inner_wall_outer_r - arc_wall_thickness;
 
 // Z extent: arcs go through plate and extend forward
-_arc_total_z             = plate_thickness + arc_extrusion;
+_outer_arc_total_z       = plate_thickness + outer_arc_extrusion;
+_inner_arc_total_z       = plate_thickness + inner_arc_extrusion;
 
 // Arc centre: positioned so apex is at plate top edge minus inset (+Y)
 _arc_center_y            = plate_height / 2 - arc_top_inset - arc_radius;
@@ -281,21 +283,21 @@ module arch_channel() {
         intersection() {
             // Clip arcs to tapered plate outline
             translate([0, 0, -0.01])
-                linear_extrude(height = _arc_total_z + 0.02)
+                linear_extrude(height = _outer_arc_total_z + 0.02)
                     _plate_profile_2d();
 
             translate([0, _arc_center_y, 0])
                 union() {
                     // Outer wall
                     arc_ring(_outer_wall_inner_r, arc_wall_thickness,
-                             _arc_total_z, arc_sweep);
+                             _outer_arc_total_z, arc_sweep);
                     // Inner wall
                     arc_ring(_inner_wall_inner_r, arc_wall_thickness,
-                             _arc_total_z, arc_sweep);
+                             _inner_arc_total_z, arc_sweep);
 
                     // Strap ridge on outer face of outer wall at front edge (curved profile)
                     if (strap_ridge_enabled)
-                        translate([0, 0, _arc_total_z - strap_ridge_width])
+                        translate([0, 0, _outer_arc_total_z - strap_ridge_width])
                             arc_ridge(arc_radius,
                                       strap_ridge_height,
                                       strap_ridge_width,
@@ -303,7 +305,7 @@ module arch_channel() {
 
                     // Ridge on inner arc wall (protrudes outward into channel)
                     if (inner_ridge_enabled)
-                        translate([0, 0, _arc_total_z - strap_ridge_width])
+                        translate([0, 0, _inner_arc_total_z - strap_ridge_width])
                             arc_ridge(_inner_wall_outer_r,
                                       inner_ridge_height,
                                       strap_ridge_width,
