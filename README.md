@@ -2,6 +2,8 @@
 
 A 3D-printable, parametric wall mount for displaying baseball caps. Fold a cap in half and slide its brim into the channel formed by two concentric arc walls — the cap hangs securely from a single screw via a keyhole slot on the backplate. Mount several in a grid on your wall for easy display and selection.
 
+![Cap Wall Mount preview](images/openscad_screenshot_01.png)
+
 ## How It Works
 
 The mount has three main parts:
