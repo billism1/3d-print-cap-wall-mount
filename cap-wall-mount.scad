@@ -50,7 +50,7 @@ arc_channel_gap          = 9.5;    // mm – gap between walls (folded cap fits 
 outer_arc_extrusion      = 25;    // mm – how far outer arc extends forward from plate face
 inner_arc_extrusion      = 20;    // mm – how far inner arc extends forward from plate face
 arc_top_inset            = 2;     // mm – distance from plate top edge to arc apex
-arc_wall_fillet          = 1;     // mm – fillet radius on arc wall cross-section corners
+arc_wall_fillet          = 1.1;     // mm – fillet radius on arc wall cross-section corners
 
 // Strap ridge (prevents cap back strap from sliding forward off the arc)
 strap_ridge_enabled      = true;  // Whether to add a ridge on the outer arc
