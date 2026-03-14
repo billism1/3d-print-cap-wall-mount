@@ -60,7 +60,7 @@ strap_ridge_width        = 4;     // mm – width of the ridge along the Z axis
 // Inner arc ridge (matching ridge on the inner/lower arc wall)
 inner_ridge_enabled      = true;  // Whether to add a ridge on the inner arc
 inner_ridge_height       = 1;     // mm – how far the ridge protrudes outward (into the channel)
-inner_ridge_width        = 4;     // mm – width of the inner ridge along the Z axis
+inner_ridge_width        = 3;     // mm – width of the inner ridge along the Z axis
 
 // Button cutout (gap at apex of outer arc for cap button)
 button_cutout_enabled    = true;  // Whether to cut a button slot in the outer arc
