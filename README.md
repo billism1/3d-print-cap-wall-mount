@@ -9,8 +9,9 @@ A 3D-printable, parametric wall mount for displaying baseball caps. Fold a cap i
 The mount has three main parts:
 
 1. **Backplate** — a flat plate with rounded corners that sits flush against the wall. It includes a keyhole screw slot (and optional bottom screw hole) so you can hang it on a drywall screw.
-2. **Arc channel** — two concentric curved walls that extend forward from the backplate. They form a channel sized to hold a folded baseball cap by its brim/edge.
+2. **Arc channel** — two concentric curved walls that extend forward from the backplate. They form a channel sized to hold a folded baseball cap by its brim/edge. The walls have filleted lower edges for smoother cap insertion and removal.
 3. **Strap ridge** — a small curved bump on the outer arc wall near the front edge that prevents the cap's adjustable strap from sliding forward and off the mount.
+4. **Button cutout** — an arched slot at the apex of the outer wall that gives the cap's top button room to sit without being compressed over time. The cutout tapers wider toward the inside face, letting the button settle naturally into the gap and making it easier to lift the cap off the mount.
 
 ## Features
 
@@ -21,6 +22,8 @@ The mount has three main parts:
 - **Keyhole mounting** — hang on a single drywall screw; optional second screw hole for extra security.
 - **Countersinks** — tapered recesses so screw heads sit flush against the wall.
 - **Strap ridge** — keeps the cap's back strap from sliding off.
+- **Button cutout** — prevents long-term compression of the cap's top button.
+- **Filleted arc walls** — rounded lower edges on the arc walls for smoother cap insertion and removal.
 
 ## Customization
 
