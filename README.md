@@ -2,6 +2,8 @@
 
 A 3D-printable, parametric wall mount for displaying baseball caps. Fold a cap in half and slide its brim into the channel formed by two concentric arc walls — the cap hangs from a keyhole screw slot on the backplate, with an optional second screw hole below for extra security. The tapered backplate is designed to print on its side so FDM layer lines run along the arc walls for maximum strength. Mount several in a grid on your wall for easy display and selection.
 
+For a cleaner look, mount the caps on a plexiglass panel and attach the panel to the wall using the included standoff tubes — this creates a floating display of baseball caps.
+
 ![Cap Wall Mount preview](images/openscad_screenshot.png)
 
 ## How It Works
@@ -93,6 +95,16 @@ Open `cap-wall-mount.scad` in [OpenSCAD](https://openscad.org/) and edit the par
 | `button_cutout_enabled` | true | Toggle the button cutout on/off |
 | `button_cutout_width` | 17 mm | Width of the cutout in X |
 | `button_cutout_height` | 15 mm | Height of the cutout from the plate surface in Z |
+
+## Standoff Tube (`standoff-tube.scad`)
+
+A simple cylindrical spacer tube sized for standard drywall screws. It sits between the plexiglass panel and the wall, holding the panel away from the wall surface to provide clearance for the screws that secure the cap mounts to the plexiglass. Drive a drywall screw through the plexiglass, through the standoff, and into the wall — the cap wall mounts are then attached to the front of the plexiglass, creating a floating display panel.
+
+| Parameter | Default | Description |
+|---|---|---|
+| `inner_diameter` | 5.4 mm | Bore diameter (sized for your screw shaft) |
+| `wall_thickness` | 4 mm | Radial wall thickness |
+| `length` | 16 mm | Total tube length (standoff distance from wall) |
 
 ## Usage
 
