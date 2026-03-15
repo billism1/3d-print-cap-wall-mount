@@ -4,7 +4,23 @@ A 3D-printable, parametric wall mount for displaying baseball caps. Fold a cap i
 
 For a cleaner look, mount the caps on a plexiglass panel and attach the panel to the wall using the included standoff tubes — this creates a floating display of baseball caps.
 
-![Cap Wall Mount preview](images/openscad_screenshot.png)
+![Cap Wall Mount preview](images/openscad_screenshot%20%28784x768%29.png)
+
+## Photos
+
+![Single cap mount secured to plexiglass with #6 bolts, nuts, and washers](images/cap_mount_01%20%281365x768%29.jpg)
+
+![18 cap wall mounts arranged in 6 rows of 3 on a 24″ × 48″ plexiglass sheet](images/cap_mounts_02%20%281365x768%29.jpg)
+
+![Plexiglass panel mounted on the wall with most cap mounts holding caps](images/cap_mounts_with_caps_01%20%281365x768%29.jpg)
+
+![Full plexiglass sheet with 18 cap mounts, most holding caps](images/cap_mounts_with_caps_06%20%281365x768%29.jpg)
+
+![Close-up of baseball caps displayed in the mounts](images/cap_mounts_with_caps_05%20%281365x768%29.jpg)
+
+The plexiglass sheet is mounted to the wall using six standoff spacers (included in this repo) and six 3″ wood screws. The cap mounts are secured to the plexiglass with #6 bolts, nuts, and washers.
+
+More photos are available in the [images](images/) folder.
 
 ## How It Works
 
