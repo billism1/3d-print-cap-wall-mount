@@ -1,5 +1,9 @@
 # Cap Wall Mount – Hat Display System
 
+> *Yes, it's a wall hook for hats. No, I didn't need to overthink it this much. But here we are — with optimized layer orientation, parametric everything, and a button cutout so your cap's top button doesn't get squished over the next decade.*
+
+**[Available on MakerWorld](https://makerworld.com/en/models/2529196-baseball-cap-display-mount)**
+
 A 3D-printable, parametric wall mount for displaying baseball caps. Fold a cap in half and slide its brim into the channel formed by two concentric arc walls — the cap hangs from a keyhole screw slot on the backplate, with an optional second screw hole below for extra security. The tapered backplate is designed to print on its side so FDM layer lines run along the arc walls for maximum strength. Mount several in a grid on your wall for easy display and selection.
 
 For a cleaner look, mount the caps on a plexiglass panel and attach the panel to the wall using the included standoff tubes — this creates a floating display of baseball caps.
