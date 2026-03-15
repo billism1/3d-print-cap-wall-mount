@@ -105,6 +105,9 @@ A simple cylindrical spacer tube sized for standard drywall screws. It sits betw
 | `inner_diameter` | 5.4 mm | Bore diameter (sized for your screw shaft) |
 | `wall_thickness` | 4 mm | Radial wall thickness |
 | `length` | 16 mm | Total tube length (standoff distance from wall) |
+| `flat_edge` | false | Adds a flat along the length of the tube for printing on its side |
+
+When `flat_edge` is enabled, the tube can be printed on its side so that FDM layer lines run axially along the tube length. This orients the layers parallel to the compressive load path between the wall and the plexiglass, maximising interlaminar shear strength and eliminating the risk of delamination under clamping force — the weakest failure mode when layers are perpendicular to the load.
 
 ## Usage
 
