@@ -8,7 +8,7 @@
 // 1. Constants & Parameters
 // ---------------------------------------------------------------------------
 
-inner_diameter = 5.4;   // mm – bore diameter
+inner_diameter = 5.5;   // mm – bore diameter
 wall_thickness = 4;     // mm – radial wall thickness
 length         = 18;    // mm – total tube length (Z axis)
 flat_edge      = false; // add a flat along the length for printing on its side
