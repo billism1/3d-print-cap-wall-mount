@@ -30,7 +30,7 @@ The mount has four main parts:
 
 ## Customization
 
-Open `cap-wall-mount.scad` in [OpenSCAD](https://openscad.org/) and edit the parameters at the top of the file:
+Open `src/cap-wall-mount.scad` in [OpenSCAD](https://openscad.org/) and edit the parameters at the top of the file:
 
 ### Backplate
 
@@ -96,7 +96,7 @@ Open `cap-wall-mount.scad` in [OpenSCAD](https://openscad.org/) and edit the par
 | `button_cutout_width` | 17 mm | Width of the cutout in X |
 | `button_cutout_height` | 15 mm | Height of the cutout from the plate surface in Z |
 
-## Standoff Tube (`standoff-tube.scad`)
+## Standoff Tube (`src/standoff-tube.scad`)
 
 A simple cylindrical spacer tube sized for standard drywall screws. It sits between the plexiglass panel and the wall, holding the panel away from the wall surface to provide clearance for the screws that secure the cap mounts to the plexiglass. Drive a drywall screw through the plexiglass, through the standoff, and into the wall — the cap wall mounts are then attached to the front of the plexiglass, creating a floating display panel.
 
@@ -111,13 +111,19 @@ When `flat_edge` is enabled, the tube can be printed on its side so that FDM lay
 
 ## Usage
 
-1. Open `cap-wall-mount.scad` in [OpenSCAD](https://openscad.org/).
+1. Open `src/cap-wall-mount.scad` in [OpenSCAD](https://openscad.org/).
 2. Adjust parameters at the top of the file to fit your caps and screws.
 3. Preview (**F5**) to check the shape, then render (**F6**).
 4. Export to STL (**F7**).
 5. Slice and print — rotate the model in your slicer so the tapered edge sits flat on the print bed (rotate by `plate_taper_angle`, default 20°). This orients the layer lines along the arc walls for maximum strength.
 6. Drive a drywall screw into the wall, hang the mount via the keyhole, and slide a folded cap into the channel.
 
+## Repository Layout
+
+- `src/` — Editable OpenSCAD source/design files.
+- `publication/` — Exported STL files ready for publishing.
+- `images/` — Screenshots and renders.
+
 ## License
 
-This project is provided as-is for personal and educational use.
+This project is licensed under the [MIT License](LICENSE).
