@@ -12,6 +12,10 @@ For a cleaner look, mount the caps on a plexiglass panel and attach the panel to
 
 ## Photos
 
+![Single stand-alone wall mount secured to the wall](images/cap_mount_02%20%28776x768%29.jpg)
+
+![Close-up of top of mount and cap button being held in place to a single stand-alone wall mount secured to the wall](images/cap_mount_with_cap_02%20%281366x768%29.jpg)
+
 ![Single cap mount secured to plexiglass with #6 bolts, nuts, and washers](images/cap_mount_01%20%281365x768%29.jpg)
 
 ![18 cap wall mounts arranged in 6 rows of 3 on a 24″ × 48″ plexiglass sheet](images/cap_mounts_02%20%281365x768%29.jpg)
