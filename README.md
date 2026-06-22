@@ -24,6 +24,10 @@ For a cleaner look, mount the caps on a plexiglass panel and attach the panel to
 
 ![Full plexiglass sheet with 18 cap mounts, most holding caps](images/cap_mounts_with_caps_06%20%281365x768%29.jpg)
 
+![My son in front of his cap display - the baseball cap collector this was designed and printed for. If you know him, then you know that is a genuine smile.](images/cap_mounts_with_caps_ben_01.jpg)
+
+*My son - the baseball cap collector this was designed and printed for. He's the one with the hat habit, not me. If you know him, then you know that is a genuine smile.*
+
 ![Close-up of baseball caps displayed in the mounts](images/cap_mounts_with_caps_05%20%281365x768%29.jpg)
 
 The plexiglass sheet is mounted to the wall using six standoff spacers (included in this repo) and six 3″ wood screws. The cap mounts are secured to the plexiglass with #6 bolts, nuts, and washers.

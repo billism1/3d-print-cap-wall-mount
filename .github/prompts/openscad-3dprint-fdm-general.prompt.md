@@ -2,21 +2,20 @@
 
 > Use this prompt for any OpenSCAD work targeting FDM (Fused Deposition Modelling) printers.
 
-## Language Notes
+## Language Rules
 
-OpenSCAD is a **functional CSG modelling language**, not a general-purpose programming language.
+OpenSCAD is a **functional CSG modelling language**, not a general-purpose programming language. Follow these rules exactly:
 
-Key differences from typical languages:
-- **No mutable variables** — all values are computed at parse time
-- **No loops with side effects** — use `for()` as a geometric generator, not a control flow loop
-- **Modules produce geometry**, not return values
-- **`difference()`, `union()`, `intersection()`** are the core boolean CSG operations
-- **`hull()`** creates the convex hull of its children — commonly used for fillets and smooth transitions
-- **`translate()`, `rotate()`, `scale()`** are transforms applied to children
-- **`$fn`** controls facet count (smoothness of curves)
-- **`children()`** lets a module operate on geometry passed to it
-- **`let()`** introduces named intermediate values inside expressions
-- **`each`** flattens nested lists in list comprehensions
+- **Do NOT use mutable variables** — compute all values at parse time
+- **Do NOT use `for()` as control flow** — use it as a geometric generator only
+- **Do NOT write functions that return values** — modules produce geometry, not data
+- **Use `hull()` for fillets and smooth transitions**, not manual chamfer math
+- **Use `let()` for named intermediate values** inside expressions
+- **Use `each` to flatten nested lists** in list comprehensions
+- **Use `children()`** when a module must operate on geometry passed to it
+- **`difference()`, `union()`, `intersection()`** are the core boolean CSG operations — prefer these over complex nested geometry
+- **`translate()`, `rotate()`, `scale()`** are transforms — always applied to children, never standalone
+- **`$fn` controls curve smoothness** — always set it explicitly; never rely on the default
 
 ## FDM Design Principles
 
@@ -35,6 +34,10 @@ Key differences from typical languages:
 - Bridging spans should stay under **~50 mm** without support.
 - Overhangs up to **~45°** from vertical generally print without support; steeper angles may need chamfers or supports.
 - Design snap-fits and living hinges with grain direction (layer orientation) in mind.
+
+## OpenSCAD Cheatsheet
+
+https://openscad.org/cheatsheet/
 
 ## Common Patterns
 
