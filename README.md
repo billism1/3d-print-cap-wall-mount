@@ -26,7 +26,7 @@ For a cleaner look, mount the caps on a plexiglass panel and attach the panel to
 
 ![My son in front of his cap display - the baseball cap collector this was designed and printed for. If you know him, then you know that is a genuine smile.](images/cap_mounts_with_caps_ben_01.jpg)
 
-*My son - the baseball cap collector this was designed and printed for. He's the one with the hat habit, not me. If you know him, then you know that is a genuine smile.*
+*My son - the baseball cap collector this was designed and printed for. He's the one with the hat habit, not me. If you know him, then you know that is a genuine smile. Mission accomplished.*
 
 ![Close-up of baseball caps displayed in the mounts](images/cap_mounts_with_caps_05%20%281365x768%29.jpg)
 
